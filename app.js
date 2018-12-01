@@ -6,6 +6,7 @@ let mongoose = require("mongoose");
 
 let apiRouter = require('./routes/apiRouter');
 let redirectRouter = require('./routes/redirectRouter');
+let defaultErrorHandler = require('./handlers/defaultErrorHandler')
 
 let config = require("./config");
 
@@ -19,8 +20,8 @@ app.use(cookieParser());
 app.use('/api', apiRouter);
 app.use(redirectRouter);
 app.use(express.static(path.join(__dirname, 'client/dist/client')));
-app.all('/*', (req, res) => {res.status(200).sendFile(path.join(__dirname, 'client/dist/client/index.html'));
-        });
+app.all('/*', (req, res) => res.status(200).sendFile(path.join(__dirname, 'client/dist/client/index.html')));
+app.use(defaultErrorHandler);
 
 
 mongoose.connect(config.db.path(), { useNewUrlParser: true });

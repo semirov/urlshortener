@@ -3,7 +3,8 @@
 
 function checkRedirectUrl(req, res, next) {
     console.log(req.path);
-    next();
+    res.redirect('http://www.google.ru');
+    // next();
 }
 
 
