@@ -7,3 +7,11 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+
+
+// redirect to url
+
+router.get('/redirect', function(req, res, next) {
+    res.redirect('http://google.ru');
+});
+

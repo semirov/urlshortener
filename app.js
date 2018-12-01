@@ -1,14 +1,15 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var mongoose = require("mongoose");
-var body-parser = require("body-parser");
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+let mongoose = require("mongoose");
 
-var apiRouter = require('./routes/apiRouter');
-var config = require("./config");
+let apiRouter = require('./routes/apiRouter');
+let redirectRouter = require('./routes/redirectRouter');
 
-var app = express();
+let config = require("./config");
+
+let app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/api', apiRouter);
+app.use(redirectRouter);
 app.use(express.static(path.join(__dirname, 'client/dist/client')));
 app.all('/*', (req, res) => {res.status(200).sendFile(path.join(__dirname, 'client/dist/client/index.html'));
         });
@@ -33,4 +35,3 @@ app.listen(config.app.port, function () {
 
 module.exports = app;
 
-// test

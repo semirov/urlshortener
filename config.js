@@ -9,6 +9,9 @@ const dev = {
    port: 27017,
    name: 'urlshortener',
    path: fullPath,
+ },
+ settings: {
+  expiresDate: 15
  }
 };
 
@@ -24,6 +27,9 @@ const prod = {
    port: 27017,
    name: 'urlshortener',
    path: fullPath.call(this),
+ },
+ settings: {
+  expiresDate: 15
  }
 };
 
