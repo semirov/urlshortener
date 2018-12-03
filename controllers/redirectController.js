@@ -1,10 +1,8 @@
 
-
-
 function checkRedirectUrl(req, res, next) {
     console.log(req.path);
-    res.redirect('http://www.google.ru');
-    // next();
+    // res.redirect('http://www.google.ru');
+    next();
 }
 
 
