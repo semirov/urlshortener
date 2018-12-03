@@ -3,14 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "babel-node": "babel-node --presets=env",
+    "start": "NODE_ENV=dev nodemon --exec npm run babel-node -- app.js",
+    "build": "babel dist"
   },
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "mongoose": "^5.3.14",
     "morgan": "~1.9.0",
+    "nodemon": "^1.18.7",
     "shortid": "^2.2.14"
   }
 }

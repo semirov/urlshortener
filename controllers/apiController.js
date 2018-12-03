@@ -1,18 +1,17 @@
 let shortid = require("shortid");
 let fullUrlModel = require('../models/fullUrlModel');
 
-function generateCutUrl(req, res, next) {
+async function generateCutUrl(req, res, next) {
     if (req.query.url === undefined) {
         return next('NO_URL_IN_QUERY');
     }
-     const fullUrlDocument = fullUrlModel.create({
-        fullUrl: 'test'
-    });
-    console.log(req.query);
-    fullUrlDocument.then(doc -> {
-    res.send({test: shortid.generate(), test2: doc});
-    });
-    // next();
+    try {
+        const fullUrlDocument = await new fullUrlModel({ fullUrl: 'test2'}).save();
+        res.send({test: shortid.generate(), test2: fullUrlDocument});
+    } catch (e) {
+        console.log(e);
+        next({code: 'CATH', trace: e})
+    }
 }
 
 

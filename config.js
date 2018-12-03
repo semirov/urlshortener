@@ -1,5 +1,5 @@
 const env = process.env.NODE_ENV; // 'dev' or 'prod'
-
+console.log(env);
 const dev = {
  app: {
    port: 3000
@@ -26,7 +26,7 @@ const prod = {
    host: 'localhost',
    port: 27017,
    name: 'urlshortener',
-   path: fullPath.call(this),
+   path: fullPath,
  },
  settings: {
   expiresDate: 15

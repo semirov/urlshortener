@@ -8,4 +8,4 @@ const fullUrlSchema = new mongoose.Schema({
     cutUrls: [{ type: mongoose.Schema.Types.ObjectId, ref: 'cutUrl' }],
 });
 
-export default mongoose.model('fullUrl', fullUrlSchema);
+module.exports = mongoose.model('fullUrl', fullUrlSchema);
