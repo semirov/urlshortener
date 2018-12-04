@@ -24,7 +24,7 @@ app.all('/*', (req, res) => res.status(200).sendFile(path.join(__dirname, 'clien
 app.use(defaultErrorHandler);
 
 
-mongoose.connect(config.db.path(), { useNewUrlParser: true });
+mongoose.connect(config.db.connectionString, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'database connection error!'));
 db.on('connected', console.log.bind(console, 'app connected to database!'));

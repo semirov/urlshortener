@@ -1,10 +1,12 @@
 let express = require('express');
 let router = express.Router();
 
-let apiCountroller = require("../controllers/apiController");
+let apiController = require("../controllers/apiController");
 
-
-router.get('/generateCutUrl', apiCountroller.generateCutUrl);
+// query.url
+router.post('/generateShortUrl', apiController.generateShortUrl);
+// query.shortUrl
+router.get('/existShortUrl', apiController.existShortUrl);
 
 
 module.exports = router;

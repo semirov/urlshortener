@@ -8,7 +8,7 @@ const urlSchema = new mongoose.Schema({
     fullUrl: {
         type: String,
     },
-    cutUrl: {
+    shortUrl: {
         type: String,
         unique: true,
         default: shortid.generate
@@ -22,6 +22,5 @@ const urlSchema = new mongoose.Schema({
         default: 0
     },
 });
-
 
 module.exports = mongoose.model('url', urlSchema);

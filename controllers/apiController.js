@@ -1,36 +1,55 @@
 let shortid = require("shortid");
+
 let urlModel = require('../models/urlModel');
+let config = require("../config.js");
 let rp = require('request-promise');
 
-async function generateCutUrl(req, res, next) {
-    let url = req.query.url;
+async function generateShortUrl(req, res, next) {
+    let url = req.body.url;
+    let shortUrl = req.body.shortUrl;
     try {
-        let urlValud = await urlIsValid(url);
-        if (urlValud) {
-            let urlDocument = new urlModel({fullUrl: testHttpPrefix(url)});
-            console.log(urlDocument);
-            genereateCutLink();
-            res.send({ testURL: urlValud, url: url });
-        } else {
+        let isUrlValid = await urlIsValid(url);
+        if (!isUrlValid) {
             return next('INVALID_URL');
-        }
-        
+        } 
+        let shortUrl = await genereateShortUrl();
+        let urlDocument = await new urlModel({ shortUrl, fullUrl: testHttpPrefix(url) }).save();
+        res.send({
+            fullUrl: urlDocument.fullUrl,
+            shortUrl: `http://${config.app.baseUrl}:${config.app.port}/${urlDocument.shortUrl}`
+        });
+
     } catch (e) {
-        console.log(e);
+        console.error(e);
         next('ERROR_IN_GENERATE_CUT_URL');
     }
 }
 
+async function existShortUrl(req, res, next) {
+    let shortUrl = req.query.shortUrl;
+    if (shortUrl === undefined) {
+        return next('CUTURL_UNDEFINED');
+    }
+    return await isShortUrlExist(shortUrl);
+}
 
 
-async function genereateCutLink() {
+async function isShortUrlExist(url) {
+    let count = await urlModel.countDocuments({ shortUrl: url });
+    if (count === 0) {
+        return false;
+    }
+    return true;
+}
+
+
+async function genereateShortUrl() {
     let newSequenceElem = shortid.generate();
-    let count = await urlModel.countDocuments({cutUrl: newSequenceElem});
-    console.log(count);
+    let count = await urlModel.countDocuments({ shortUrl: newSequenceElem });
     if (count === 0) {
         return newSequenceElem;
     } else {
-        return await genereateCutLink();
+        return await genereateShortUrl();
     }
 }
 
@@ -60,4 +79,5 @@ function testHttpPrefix(url) {
 }
 
 
-module.exports.generateCutUrl = generateCutUrl;
+module.exports.generateShortUrl = generateShortUrl;
+module.exports.existShortUrl = existShortUrl;
