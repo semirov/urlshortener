@@ -7,13 +7,13 @@ let mongoose = require("mongoose");
 let apiRouter = require('./routes/apiRouter');
 let redirectRouter = require('./routes/redirectRouter');
 let defaultSheduler = require('./sheduler/defaultSheduler');
-let defaultErrorHandler = require('./handlers/defaultErrorHandler')
-
+let defaultErrorHandler = require('./handlers/defaultErrorHandler');
+let winston = require('./logger/winston');
 let config = require("./config");
 
 let app = express();
 
-app.use(logger('combined'));
+app.use(logger('combined', { stream: winston.stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -27,12 +27,12 @@ app.use(defaultErrorHandler);
 
 mongoose.connect(config.db.connectionString, { useNewUrlParser: true });
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'database connection error!'));
-db.on('connected', console.log.bind(console, 'app connected to database!'));
+db.on('error', winston.error.bind(winston, 'database connection error!'));
+db.on('connected', winston.info.bind(winston, 'app connected to database'));
 
 
 app.listen(config.app.port, function () {
-    console.log(`Urlshortener listening on port: ${config.app.port}`);
+  winston.info(`app listening on port: ${config.app.port}`);
   });
 
 defaultSheduler();

@@ -1,8 +1,10 @@
 let errorHelper = require("./errorHelper");
+let winston = require('../logger/winston');
 
 function defaultErrorHandler(err, req, res, next) {
-    console.error(`DEFAULT ERROR HANDLER: ${err}`);
+    winston.error(err);
     res.status(errorHelper(err).code).send(errorHelper(err));
+    
 }
 
 module.exports = defaultErrorHandler;

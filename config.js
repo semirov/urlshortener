@@ -1,6 +1,8 @@
+let winston = require('./logger/winston');
+
 const env = process.env.NODE_ENV; // 'dev' or 'prod'
-console.log("Use NODE_ENV: " + env);
-console.log("Use DB_USERNAME: " + process.env.DB_USERNAME);
+winston.info("Use NODE_ENV: " + env);
+winston.info("Use DB_USERNAME: " + process.env.DB_USERNAME);
 const dev = {
   app: {
     baseUrl: 'http://localhost',
