@@ -110,7 +110,7 @@ async function urlIsValid(url) {
  * @param {string} url 
  * @returns {string} checked url
  */
-function fixHttpPrefix(url) {
+function testHttpPrefix(url) {
     if (url.indexOf("http://") == 0 || url.indexOf("https://") == 0) {
         return url;
     } else {
