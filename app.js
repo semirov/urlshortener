@@ -6,13 +6,14 @@ let mongoose = require("mongoose");
 
 let apiRouter = require('./routes/apiRouter');
 let redirectRouter = require('./routes/redirectRouter');
+let defaultSheduler = require('./sheduler/defaultSheduler');
 let defaultErrorHandler = require('./handlers/defaultErrorHandler')
 
 let config = require("./config");
 
 let app = express();
 
-app.use(logger('dev'));
+app.use(logger('combined'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -33,6 +34,8 @@ db.on('connected', console.log.bind(console, 'app connected to database!'));
 app.listen(config.app.port, function () {
     console.log(`Urlshortener listening on port: ${config.app.port}`);
   });
+
+defaultSheduler();
 
 module.exports = app;
 

@@ -82,7 +82,7 @@ async function isShortUrlExist(url) {
  */
 async function genereateShortUrl() {
     let newSequenceElem = shortid.generate();
-    let isUrlExist = isShortUrlExist(newSequenceElem);
+    let isUrlExist = await isShortUrlExist(newSequenceElem);
     if (!isUrlExist) { return newSequenceElem; }
     return await genereateShortUrl();
 }
