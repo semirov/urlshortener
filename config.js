@@ -3,7 +3,7 @@ console.log("Use NODE_ENV: " + env);
 console.log("Use DB_USERNAME: " + process.env.DB_USERNAME);
 const dev = {
   app: {
-    baseUrl: 'localhost',
+    baseUrl: 'http://localhost',
     port: process.env.PORT || 3000
   },
   db: {
@@ -16,7 +16,7 @@ const dev = {
 
 const production = {
   app: {
-    baseUrl: process.env.APP_BASE_URL || 'localhost',
+    baseUrl: process.env.APP_BASE_URL || 'http://localhost',
     port: process.env.PORT || 80
   },
   db: {

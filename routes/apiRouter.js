@@ -8,5 +8,7 @@ router.post('/generateShortUrl', apiController.generateShortUrl);
 // query.shortUrl
 router.get('/existShortUrl', apiController.existShortUrl);
 
+router.get('/all', apiController.getAllUrls);
+
 
 module.exports = router;
