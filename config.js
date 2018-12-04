@@ -1,5 +1,6 @@
 const env = process.env.NODE_ENV; // 'dev' or 'prod'
 console.log("Use NODE_ENV: " + env);
+console.log("Use DB_USERNAME: " + process.env.DB_USERNAME);
 const dev = {
   app: {
     baseUrl: 'localhost',
@@ -19,11 +20,7 @@ const production = {
     port: process.env.PORT || 80
   },
   db: {
-    connectionString: `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}
-    @cluster0-shard-00-00-ijg1l.mongodb.net:27017,
-    cluster0-shard-00-01-ijg1l.mongodb.net:27017,
-    cluster0-shard-00-02-ijg1l.mongodb.net:27017/urlshortener
-    ?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true`
+    connectionString: `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0-ijg1l.mongodb.net/urlshortener?retryWrites=true`
   },
   settings: {
     expiresDate: 15
