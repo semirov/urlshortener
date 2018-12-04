@@ -2,7 +2,7 @@ let errorHelper = require("./errorHelper");
 let winston = require('../logger/winston');
 
 function defaultErrorHandler(err, req, res, next) {
-    winston.error(err);
+    winston.warn(err);
     res.status(errorHelper(err).code).send(errorHelper(err));
     
 }
