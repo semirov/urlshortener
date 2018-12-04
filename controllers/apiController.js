@@ -94,7 +94,7 @@ async function genereateShortUrl() {
  */
 async function urlIsValid(url) {
     if (url === undefined) { return false; }
-    let options = { method: 'GET', uri: testHttpPrefix(url), resolveWithFullResponse: true };
+    let options = { method: 'GET', uri: fixHttpPrefix(url), resolveWithFullResponse: true };
     try {
         let res = await requestPromise(options);
         let statusCode = res.statusCode;
@@ -110,7 +110,7 @@ async function urlIsValid(url) {
  * @param {string} url 
  * @returns {string} checked url
  */
-function testHttpPrefix(url) {
+function fixHttpPrefix(url) {
     if (url.indexOf("http://") == 0 || url.indexOf("https://") == 0) {
         return url;
     } else {
