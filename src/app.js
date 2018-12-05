@@ -1,5 +1,7 @@
 require("babel-core/register");
-require("babel-polyfill");
+if (!global._babelPolyfill) {
+	require('babel-polyfill');
+}
 
 let express = require('express');
 let path = require('path');
