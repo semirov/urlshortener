@@ -21,9 +21,7 @@ export class BackendApiService {
   constructor(
     private http: HttpClient,
     private errorHandler: DefaultErrorHandler,
-  ) {
-    console.log('baseApiUrl', this.baseApiUrl);
-   }
+  ) {}
 
   private request(
     method: string,
@@ -57,6 +55,10 @@ export class BackendApiService {
 
   getAll(): Observable<any> {
     return this.request('GET', `${this.baseApiUrl}/all`);
+  }
+
+  validateUrl(url: string): Observable<any> {
+    return this.request('POST', `${this.baseApiUrl}/validateUrl`, {url});
   }
 
 }

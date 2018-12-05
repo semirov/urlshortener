@@ -11,5 +11,8 @@ router.get('/existShortUrl', apiController.existShortUrl);
 
 router.get('/all', apiController.getAllUrls);
 
+// body.url
+router.post('/validateUrl', apiController.testUrlStatus);
+
 
 module.exports = router;

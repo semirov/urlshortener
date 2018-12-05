@@ -64,6 +64,18 @@ async function getAllUrls(req, res, next) {
     res.send(allUrls);
 }
 
+async function testUrlStatus(req, res, next) {
+    try {
+        let url = req.body.url;
+        let customShortUrl = req.body.shortUrl;
+        let isUrlValid = await urlIsValid(url);
+        res.send(isUrlValid);
+    } catch (e) {
+        console.error(e);
+        next('ERROR_IN_VALIDATE_URL');
+    }
+}
+
 
 /**
  * Check if short url exists
@@ -135,3 +147,4 @@ function generateFullRedirectUrl(shortUrl) {
 module.exports.generateShortUrl = generateShortUrl;
 module.exports.existShortUrl = existShortUrl;
 module.exports.getAllUrls = getAllUrls;
+module.exports.testUrlStatus = testUrlStatus;
