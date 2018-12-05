@@ -1,0 +1,9 @@
+.row {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #fff;
+    opacity: 1;
+}

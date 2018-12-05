@@ -7,6 +7,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -14,10 +16,9 @@ import { MainComponent } from './main/main.component';
     MainComponent
   ],
   imports: [
-    BrowserModule,
+    CoreModule,
+    SharedModule,
     AppRoutingModule,
-    NgbModule.forRoot(),
-    AngularFontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
