@@ -1,7 +1,9 @@
-"use strict";
+'use strict';
 
 require("babel-core/register");
-require("babel-polyfill");
+if (!global._babelPolyfill) {
+  require('babel-polyfill');
+}
 
 var express = require('express');
 var path = require('path');
@@ -9,6 +11,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require("mongoose");
 var appRoot = require('app-root-path');
+var cors = require('cors');
 
 var apiRouter = require('./routes/apiRouter');
 var redirectRouter = require('./routes/redirectRouter');
@@ -23,6 +26,7 @@ app.use(logger('combined', { stream: winston.stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors());
 
 app.use('/api', apiRouter);
 app.use(redirectRouter);
@@ -38,7 +42,7 @@ db.on('error', winston.error.bind(winston, 'database connection error!'));
 db.on('connected', winston.info.bind(winston, 'app connected to database'));
 
 app.listen(config.app.port, function () {
-  winston.info("app listening on port: " + config.app.port);
+  winston.info('app listening on port: ' + config.app.port);
 });
 
 defaultSheduler();

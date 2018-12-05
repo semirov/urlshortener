@@ -9,6 +9,7 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let mongoose = require("mongoose");
 let appRoot = require('app-root-path');
+var cors = require('cors');
 
 let apiRouter = require('./routes/apiRouter');
 let redirectRouter = require('./routes/redirectRouter');
@@ -19,6 +20,9 @@ let config = require("./config");
 
 let app = express();
 
+
+
+app.use(cors());
 app.use(logger('combined', { stream: winston.stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

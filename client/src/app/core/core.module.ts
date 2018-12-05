@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { throwIfAlreadyLoaded } from './guard/module-import-guard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BackendApiService } from './services/backend-api.service';
+import { DefaultErrorHandler } from './services/default-error-handler.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
@@ -12,14 +14,17 @@ import { BackendApiService } from './services/backend-api.service';
     CommonModule,
     BrowserModule,
     NgbModule.forRoot(),
+    HttpClientModule
   ],
   providers: [
-    BackendApiService
+    BackendApiService,
+    DefaultErrorHandler
   ]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     throwIfAlreadyLoaded(parentModule, 'CoreModule');
+    console.log('core is loading');
   }
 }
 
