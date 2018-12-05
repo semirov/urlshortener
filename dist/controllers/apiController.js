@@ -179,6 +179,46 @@ var getAllUrls = function () {
     };
 }();
 
+var testUrlStatus = function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res, next) {
+        var url, customShortUrl, isUrlValid;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+            while (1) {
+                switch (_context4.prev = _context4.next) {
+                    case 0:
+                        _context4.prev = 0;
+                        url = req.body.url;
+                        customShortUrl = req.body.shortUrl;
+                        _context4.next = 5;
+                        return urlIsValid(url);
+
+                    case 5:
+                        isUrlValid = _context4.sent;
+
+                        res.send(isUrlValid);
+                        _context4.next = 13;
+                        break;
+
+                    case 9:
+                        _context4.prev = 9;
+                        _context4.t0 = _context4['catch'](0);
+
+                        console.error(_context4.t0);
+                        next('ERROR_IN_VALIDATE_URL');
+
+                    case 13:
+                    case 'end':
+                        return _context4.stop();
+                }
+            }
+        }, _callee4, this, [[0, 9]]);
+    }));
+
+    return function testUrlStatus(_x10, _x11, _x12) {
+        return _ref4.apply(this, arguments);
+    };
+}();
+
 /**
  * Check if short url exists
  * @param {string} url 
@@ -187,38 +227,38 @@ var getAllUrls = function () {
 
 
 var isShortUrlExist = function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(url) {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(url) {
         var count;
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
             while (1) {
-                switch (_context4.prev = _context4.next) {
+                switch (_context5.prev = _context5.next) {
                     case 0:
-                        _context4.next = 2;
+                        _context5.next = 2;
                         return urlModel.countDocuments({ shortUrl: url });
 
                     case 2:
-                        count = _context4.sent;
+                        count = _context5.sent;
 
                         if (!(count === 0)) {
-                            _context4.next = 5;
+                            _context5.next = 5;
                             break;
                         }
 
-                        return _context4.abrupt('return', false);
+                        return _context5.abrupt('return', false);
 
                     case 5:
-                        return _context4.abrupt('return', true);
+                        return _context5.abrupt('return', true);
 
                     case 6:
                     case 'end':
-                        return _context4.stop();
+                        return _context5.stop();
                 }
             }
-        }, _callee4, this);
+        }, _callee5, this);
     }));
 
-    return function isShortUrlExist(_x10) {
-        return _ref4.apply(this, arguments);
+    return function isShortUrlExist(_x13) {
+        return _ref5.apply(this, arguments);
     };
 }();
 
@@ -229,43 +269,43 @@ var isShortUrlExist = function () {
 
 
 var genereateShortUrl = function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
         var newSequenceElem, isUrlExist;
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
             while (1) {
-                switch (_context5.prev = _context5.next) {
+                switch (_context6.prev = _context6.next) {
                     case 0:
                         newSequenceElem = shortid.generate();
-                        _context5.next = 3;
+                        _context6.next = 3;
                         return isShortUrlExist(newSequenceElem);
 
                     case 3:
-                        isUrlExist = _context5.sent;
+                        isUrlExist = _context6.sent;
 
                         if (isUrlExist) {
-                            _context5.next = 6;
+                            _context6.next = 6;
                             break;
                         }
 
-                        return _context5.abrupt('return', newSequenceElem);
+                        return _context6.abrupt('return', newSequenceElem);
 
                     case 6:
-                        _context5.next = 8;
+                        _context6.next = 8;
                         return genereateShortUrl();
 
                     case 8:
-                        return _context5.abrupt('return', _context5.sent);
+                        return _context6.abrupt('return', _context6.sent);
 
                     case 9:
                     case 'end':
-                        return _context5.stop();
+                        return _context6.stop();
                 }
             }
-        }, _callee5, this);
+        }, _callee6, this);
     }));
 
     return function genereateShortUrl() {
-        return _ref5.apply(this, arguments);
+        return _ref6.apply(this, arguments);
     };
 }();
 
@@ -277,54 +317,54 @@ var genereateShortUrl = function () {
 
 
 var urlIsValid = function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(url) {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(url) {
         var options, res, statusCode;
-        return regeneratorRuntime.wrap(function _callee6$(_context6) {
+        return regeneratorRuntime.wrap(function _callee7$(_context7) {
             while (1) {
-                switch (_context6.prev = _context6.next) {
+                switch (_context7.prev = _context7.next) {
                     case 0:
                         if (!(url === undefined)) {
-                            _context6.next = 2;
+                            _context7.next = 2;
                             break;
                         }
 
-                        return _context6.abrupt('return', false);
+                        return _context7.abrupt('return', false);
 
                     case 2:
                         options = { method: 'GET', uri: fixHttpPrefix(url), resolveWithFullResponse: true };
-                        _context6.prev = 3;
-                        _context6.next = 6;
+                        _context7.prev = 3;
+                        _context7.next = 6;
                         return requestPromise(options);
 
                     case 6:
-                        res = _context6.sent;
+                        res = _context7.sent;
                         statusCode = res.statusCode;
 
                         if (!(statusCode < 200 || statusCode > 299)) {
-                            _context6.next = 10;
+                            _context7.next = 10;
                             break;
                         }
 
-                        return _context6.abrupt('return', false);
+                        return _context7.abrupt('return', false);
 
                     case 10:
-                        return _context6.abrupt('return', true);
+                        return _context7.abrupt('return', true);
 
                     case 13:
-                        _context6.prev = 13;
-                        _context6.t0 = _context6['catch'](3);
-                        return _context6.abrupt('return', false);
+                        _context7.prev = 13;
+                        _context7.t0 = _context7['catch'](3);
+                        return _context7.abrupt('return', false);
 
                     case 16:
                     case 'end':
-                        return _context6.stop();
+                        return _context7.stop();
                 }
             }
-        }, _callee6, this, [[3, 13]]);
+        }, _callee7, this, [[3, 13]]);
     }));
 
-    return function urlIsValid(_x11) {
-        return _ref6.apply(this, arguments);
+    return function urlIsValid(_x14) {
+        return _ref7.apply(this, arguments);
     };
 }();
 
@@ -365,3 +405,4 @@ function generateFullRedirectUrl(shortUrl) {
 module.exports.generateShortUrl = generateShortUrl;
 module.exports.existShortUrl = existShortUrl;
 module.exports.getAllUrls = getAllUrls;
+module.exports.testUrlStatus = testUrlStatus;

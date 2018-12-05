@@ -2,7 +2,7 @@
   <div class="col-lg-7 text-left">
     <form [formGroup]="mainForm">
       <div class="input-group">
-        <input type="url" formControlName="url" class="form-control is-invalid" placeholder="Enter the URL to create a short link" aria-label="Enter the URL to create a short link">
+        <input type="url" formControlName="url" class="form-control" placeholder="Enter the URL to create a short link" aria-label="Enter the URL to create a short link">
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button">Create</button>
           <button class="btn btn-outline-secondary" type="button">Custom
@@ -14,8 +14,9 @@
         </div>
       </div>
       <div class="input-group">
-        <input type="url" formControlName="short" class="form-control is-invalid" placeholder="Enter your custom path" aria-label="Enter the URL to create a short link">
+        <input type="url" formControlName="short" class="form-control" placeholder="Enter your custom path" aria-label="Enter the URL to create a short link">
         <div class="input-group-append">
+          <!--  is-invalid -->
           <button class="btn btn-outline-secondary" type="button">Create</button>
         </div>
         <div class="invalid-feedback">

@@ -22,11 +22,11 @@ var config = require("./config");
 
 var app = express();
 
+app.use(cors());
 app.use(logger('combined', { stream: winston.stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(cors());
 
 app.use('/api', apiRouter);
 app.use(redirectRouter);
