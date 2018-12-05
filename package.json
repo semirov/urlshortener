@@ -5,7 +5,7 @@
   "scripts": {
     "babel-node": "babel-node --presets=env",
     "start:dev": "nodemon --exec npm run babel-node -- src/app.js",
-    "start": "nodemon ./dist/app.js",
+    "start": "node ./dist/app.js",
     "env_dev": "set NODE_ENV=dev",
     "build": "babel src -d dist"
   },
@@ -13,6 +13,9 @@
     "app-root-path": "^2.1.0",
     "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
+    "babel-loader": "^8.0.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
     "cookie-parser": "~1.4.3",
     "express": "~4.16.0",
     "mongoose": "^5.3.14",
@@ -21,14 +24,10 @@
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "shortid": "^2.2.14",
-    "winston": "^3.1.0",
-    "nodemon": "^1.18.7"
+    "winston": "^3.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-loader": "^8.0.4",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1"
+    "nodemon": "^1.18.7"
   }
 }
