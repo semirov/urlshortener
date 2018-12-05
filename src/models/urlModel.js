@@ -1,5 +1,5 @@
 let mongoose = require("mongoose");
-let config = require("../config.js");
+let config = require("../config");
 let shortid = require("shortid");
 
 

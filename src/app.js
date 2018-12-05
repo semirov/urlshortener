@@ -1,8 +1,12 @@
+require("babel-core/register");
+require("babel-polyfill");
+
 let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let mongoose = require("mongoose");
+let appRoot = require('app-root-path');
 
 let apiRouter = require('./routes/apiRouter');
 let redirectRouter = require('./routes/redirectRouter');
@@ -20,8 +24,8 @@ app.use(cookieParser());
 
 app.use('/api', apiRouter);
 app.use(redirectRouter);
-app.use(express.static(path.join(__dirname, 'client/dist/client')));
-app.all('/*', (req, res) => res.status(200).sendFile(path.join(__dirname, 'client/dist/client/index.html')));
+app.use(express.static(path.join(appRoot.toString(), 'client/dist/client')));
+app.all('/*', (req, res) => res.status(200).sendFile(path.join(appRoot.toString(), './client/dist/client/index.html')));
 app.use(defaultErrorHandler);
 
 
