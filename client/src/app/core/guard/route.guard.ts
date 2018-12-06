@@ -14,16 +14,22 @@ export class RouteGuard implements CanActivate {
       private location: Location
     ) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return new Observable(observer => {
       this.backendApiService.redirectUrl(state.url.substring(1)).subscribe(
         res => {
           if (res) {
             window.location.href = res.fullUrl;
             this.router.navigate(['redirection']);
+            observer.next(false);
+            observer.complete();
+          } else {
+            observer.next(true);
+            observer.complete();
           }
         }
       );
-      console.log(state);
-    return true;
+
+    })
   }
 }
