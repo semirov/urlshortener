@@ -37,11 +37,14 @@
       </div>
     </form>
     <div @enterLeave @leave (@leave.done)="onClickRestartAfterAnimation($event)" *ngIf="generateResultVisible" class="text-center generate-result">
-     <span>Ta-da! This is you short url:</span>  {{shortUrl}}
-      
+      <p class="display-4">Ta-da!</p>
+     <span class="lead">This is you short url: </span> <span class="lead strong copy-clipboard" #tooltip="ngbTooltip" [ngbTooltip]="tipContent"  (click)="onClickLink(tooltip)" placement="bottom" ngbTooltip="Click to copy"> {{shortUrl}}</span>  
     </div>
+
+    <ng-template #tipContent let-tipMessage="tipMessage">{{tipMessage || 'Click to copy!'}}</ng-template>
+
     <div  @enterDelay3sec *ngIf="generateResultVisible" class="text-center restart-button">
-        <button (click) = 'hideResultAndRestart()' class="btn btn-outline-secondary" type="button">Another link?</button>
+        <button (click) = 'hideResultAndRestart()' class="btn btn-outline-secondary" type="button" >Another link?</button>
     </div>
 
   </div>

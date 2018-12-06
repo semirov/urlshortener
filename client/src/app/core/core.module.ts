@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     BackendApiService,
-    DefaultErrorHandler
+    DefaultErrorHandler,
   ]
 })
 export class CoreModule {

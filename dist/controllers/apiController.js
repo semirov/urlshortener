@@ -109,7 +109,7 @@ var generateShortUrl = function () {
 
 var existShortUrl = function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(req, res, next) {
-        var shortUrl;
+        var shortUrl, result;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
@@ -128,9 +128,11 @@ var existShortUrl = function () {
                         return isShortUrlExist(shortUrl);
 
                     case 5:
-                        return _context2.abrupt('return', _context2.sent);
+                        result = _context2.sent;
 
-                    case 6:
+                        res.send(result);
+
+                    case 7:
                     case 'end':
                         return _context2.stop();
                 }
@@ -179,6 +181,14 @@ var getAllUrls = function () {
     };
 }();
 
+/**
+ * Return true if url exist
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+
+
 var testUrlStatus = function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res, next) {
         var url, customShortUrl, isUrlValid;
@@ -196,17 +206,16 @@ var testUrlStatus = function () {
                         isUrlValid = _context4.sent;
 
                         res.send(isUrlValid);
-                        _context4.next = 13;
+                        _context4.next = 12;
                         break;
 
                     case 9:
                         _context4.prev = 9;
                         _context4.t0 = _context4['catch'](0);
 
-                        console.error(_context4.t0);
                         next('ERROR_IN_VALIDATE_URL');
 
-                    case 13:
+                    case 12:
                     case 'end':
                         return _context4.stop();
                 }
@@ -234,7 +243,7 @@ var isShortUrlExist = function () {
                 switch (_context5.prev = _context5.next) {
                     case 0:
                         _context5.next = 2;
-                        return urlModel.countDocuments({ shortUrl: url });
+                        return urlModel.countDocuments({ shortUrl: url }).exec();
 
                     case 2:
                         count = _context5.sent;

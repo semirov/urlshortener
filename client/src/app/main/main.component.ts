@@ -4,6 +4,7 @@ import { BackendApiService } from '../core/services/backend-api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { enterLeave, enterDelay3sec, leave } from '../shared/animation/enterLeave';
 import { PlatformLocation } from '@angular/common';
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'app-main',
@@ -26,7 +27,8 @@ export class MainComponent implements OnInit {
     private validatorsService: ValidatorsService,
     private backendApiService: BackendApiService,
     private fb: FormBuilder,
-    private platformLocation: PlatformLocation
+    private platformLocation: PlatformLocation,
+    private clipboardService: ClipboardService
   ) { }
 
   ngOnInit() {
@@ -105,6 +107,14 @@ export class MainComponent implements OnInit {
       );
     }
 
+  }
+
+  onClickLink(tooltip) {
+    if (tooltip.isOpen()) {
+      tooltip.close();
+    }
+    this.clipboardService.copyFromContent(this.shortUrl);
+      tooltip.open({tipMessage: 'Copied!'});
   }
 
 }

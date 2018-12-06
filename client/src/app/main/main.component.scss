@@ -9,9 +9,13 @@
 }
 
 .generate-result > span {
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .restart-button {
-    margin-top: 5%;
+    margin-top: 3%;
+}
+
+.copy-clipboard {
+    cursor: pointer;
 }

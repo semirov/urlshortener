@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 var winston = require('./logger/winston');
 
-var env = process.env.NODE_ENV; // 'dev' or 'prod'
+var env = process.env.NODE_ENV || 'dev'; // 'dev' or 'prod'
 winston.info("Use NODE_ENV: " + env);
 winston.info("Use DB_USERNAME: " + process.env.DB_USERNAME);
 var dev = {
@@ -24,7 +24,7 @@ var production = {
     port: process.env.PORT || 80
   },
   db: {
-    connectionString: "mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@cluster0-ijg1l.mongodb.net/urlshortener?retryWrites=true"
+    connectionString: 'mongodb+srv://' + process.env.DB_USERNAME + ':' + process.env.DB_PASSWORD + '@cluster0-ijg1l.mongodb.net/urlshortener?retryWrites=true'
   },
   settings: {
     expiresDate: 15
@@ -37,7 +37,7 @@ var config = {
 };
 
 function fullPath() {
-  return "mongodb://" + this.host + ":" + this.port + "/" + this.name;
+  return 'mongodb://' + this.host + ':' + this.port + '/' + this.name;
 }
 
 module.exports = config[env];
