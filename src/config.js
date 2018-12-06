@@ -5,7 +5,7 @@ winston.info("Use NODE_ENV: " + env);
 winston.info("Use DB_USERNAME: " + process.env.DB_USERNAME);
 const dev = {
   app: {
-    baseUrl: 'http://localhost',
+    baseUrl: 'http://localhost:4200',
     port: process.env.PORT || 3000
   },
   db: {

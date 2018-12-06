@@ -10,12 +10,14 @@ import { MainComponent } from './main/main.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { RedirectComponent } from './redirect/redirect.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RedirectComponent
   ],
   imports: [
     CoreModule,

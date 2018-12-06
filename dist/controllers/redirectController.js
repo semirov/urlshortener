@@ -8,31 +8,33 @@ var checkRedirectUrl = function () {
                 switch (_context.prev = _context.next) {
                     case 0:
                         shortUrl = req.path.slice(1);
-                        _context.next = 3;
+
+                        console.log(shortUrl);
+                        _context.next = 4;
                         return urlModel.findOne({ shortUrl: shortUrl });
 
-                    case 3:
+                    case 4:
                         document = _context.sent;
 
                         if (document) {
-                            _context.next = 6;
+                            _context.next = 7;
                             break;
                         }
 
                         return _context.abrupt('return', next());
 
-                    case 6:
+                    case 7:
                         fullUrl = document.get('fullUrl');
                         requestCount = document.get('requestCount');
 
                         document.requestCount = requestCount + 1;
-                        _context.next = 11;
+                        _context.next = 12;
                         return document.save();
 
-                    case 11:
+                    case 12:
                         res.redirect(fullUrl);
 
-                    case 12:
+                    case 13:
                     case 'end':
                         return _context.stop();
                 }

@@ -16,7 +16,7 @@ router.get('/all', apiController.getAllUrls);
 router.post('/validateUrl', apiController.testUrlStatus);
 
 
-router.get('*', redirectController.checkRedirectUrl);
+router.get('/redirectUrl/:redirectPath', apiController.getRedirectUrl);
 
 
 module.exports = router;

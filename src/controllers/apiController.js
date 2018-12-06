@@ -82,6 +82,21 @@ async function testUrlStatus(req, res, next) {
     }
 }
 
+async function getRedirectUrl(req, res, next) {
+    let shortUrl = req.params.redirectPath;
+    console.log(shortUrl);
+    let document = await urlModel.findOne({shortUrl: shortUrl});
+    console.log(document);
+    if(!document) {
+        return res.send(null);
+    }
+    let fullUrl = document.get('fullUrl');
+    let requestCount = document.get('requestCount');
+    document.requestCount = requestCount + 1;
+    await document.save();
+    res.send({fullUrl});
+}
+
 
 /**
  * Check if short url exists
@@ -156,3 +171,4 @@ module.exports.generateShortUrl = generateShortUrl;
 module.exports.existShortUrl = existShortUrl;
 module.exports.getAllUrls = getAllUrls;
 module.exports.testUrlStatus = testUrlStatus;
+module.exports.getRedirectUrl = getRedirectUrl;
