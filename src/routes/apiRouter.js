@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 
+let redirectController = require('../controllers/redirectController');
 let apiController = require("../controllers/apiController");
 
 // body.url body.shortUrl?
@@ -13,6 +14,9 @@ router.get('/all', apiController.getAllUrls);
 
 // body.url
 router.post('/validateUrl', apiController.testUrlStatus);
+
+
+router.get('*', redirectController.checkRedirectUrl);
 
 
 module.exports = router;

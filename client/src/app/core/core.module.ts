@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BackendApiService } from './services/backend-api.service';
 import { DefaultErrorHandler } from './services/default-error-handler.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RouteGuard } from './guard/route.guard';
 
 @NgModule({
   declarations: [],
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     BackendApiService,
     DefaultErrorHandler,
+    RouteGuard
   ]
 })
 export class CoreModule {

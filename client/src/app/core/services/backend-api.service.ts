@@ -61,4 +61,8 @@ export class BackendApiService {
     return this.request('POST', `${this.baseApiUrl}/validateUrl`, {url});
   }
 
+  checkRedirect(path: string): Observable<any> {
+    return this.request('GET', `${this.baseApiUrl}/${path}`);
+  }
+
 }
