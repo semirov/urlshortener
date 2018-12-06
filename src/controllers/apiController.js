@@ -50,7 +50,8 @@ async function existShortUrl(req, res, next) {
     if (shortUrl === undefined) {
         return next('SHORTURL_UNDEFINED');
     }
-    return await isShortUrlExist(shortUrl);
+    const result = await isShortUrlExist(shortUrl);
+    res.send(result);
 }
 
 /**
@@ -64,6 +65,12 @@ async function getAllUrls(req, res, next) {
     res.send(allUrls);
 }
 
+/**
+ * Return true if url exist
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 async function testUrlStatus(req, res, next) {
     try {
         let url = req.body.url;
@@ -71,7 +78,6 @@ async function testUrlStatus(req, res, next) {
         let isUrlValid = await urlIsValid(url);
         res.send(isUrlValid);
     } catch (e) {
-        console.error(e);
         next('ERROR_IN_VALIDATE_URL');
     }
 }
@@ -83,8 +89,10 @@ async function testUrlStatus(req, res, next) {
  * @returns {boolean}
  */
 async function isShortUrlExist(url) {
-    let count = await urlModel.countDocuments({ shortUrl: url });
-    if (count === 0) { return false; }
+    let count = await urlModel.countDocuments({ shortUrl: url }).exec();
+    if (count === 0) { 
+        return false; 
+    }
     return true;
 }
 

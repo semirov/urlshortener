@@ -1,11 +1,19 @@
-<div class="login-overlay">
-  <div class="logo">
-    url-shortener
-    <br>
-    <span class="smaller">
+<div class="container-fluid">
+  <div class="login-overlay">
+    <div class="logo">
+      url-shortener
+      <br>
+      <span class="smaller">
         generate short link for you</span>
+    </div>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
   </div>
-  <div class="content">
-    <router-outlet></router-outlet>
-  </div>
+  <footer class="page-footer">
+    <div class="text-right">
+        <a href="https://github.com/semirov/urlshortener"><fa name="github" size="2x"></fa></a>
+    </div>
+
+  </footer>
 </div>

@@ -24,7 +24,6 @@ import { HttpClientModule } from '@angular/common/http';
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     throwIfAlreadyLoaded(parentModule, 'CoreModule');
-    console.log('core is loading');
   }
 }
 

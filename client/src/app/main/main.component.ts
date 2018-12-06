@@ -2,32 +2,109 @@ import { Component, OnInit } from '@angular/core';
 import { ValidatorsService } from '../core/services/validators.service';
 import { BackendApiService } from '../core/services/backend-api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { enterLeave, enterDelay3sec, leave } from '../shared/animation/enterLeave';
+import { PlatformLocation } from '@angular/common';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
+  animations: [enterLeave, enterDelay3sec, leave]
 })
 export class MainComponent implements OnInit {
 
   mainForm: FormGroup;
+  urlFieldVisible = true;
+  customUrlVisible = false;
+  generateResultVisible = false;
+  mainComponentVisible = true;
+  isInvalid = true;
+  currentUrl = '';
+  shortUrl = '';
 
   constructor(
     private validatorsService: ValidatorsService,
     private backendApiService: BackendApiService,
     private fb: FormBuilder,
+    private platformLocation: PlatformLocation
   ) { }
 
   ngOnInit() {
     this.createForm();
+    this.mainComponentVisible = true;
+    this.urlFieldVisible = true;
+    this.customUrlVisible = false;
+    this.generateResultVisible = false;
+    this.currentUrl = (this.platformLocation as any).location.href;
   }
 
 
   private createForm() {
     this.mainForm = this.fb.group({
-      url: [undefined, Validators.required,  this.validatorsService.urlValidator() ],
-      short: [{ value: '', disabled: true }, undefined, this.validatorsService.customLinkExistValidator()],
+      url: ['', Validators.required, this.validatorsService.urlValidator()],
+      short: ['', undefined, this.validatorsService.customLinkExistValidator()],
       generatedLink: [{ value: '', disabled: true }],
     });
   }
+
+  fieldIsInvalid(fieldName: string) {
+    const errors = this.mainForm.get(fieldName).errors;
+    const isError = errors ? true : false;
+    return isError;
+  }
+
+  getErrorMessage(fieldName: string) {
+    const errors = this.mainForm.get(fieldName).errors;
+    // console.log(fieldName, errors);
+    if (errors && errors['required']) { return 'Field is required..'; }
+    if (errors && errors['urlNotValid']) { return 'Url has the wrong format ..'; }
+    if (errors && errors['urlNotExist']) { return 'We checked, this url does not exist, we are sorry..'; }
+    if (errors && errors['shortUrlExist']) { return 'Link already in use, try another..'; }
+    if (errors && errors['invalidShortUrl']) { return 'Sorry, but this link cannot be used..'; }
+    return 'Something is wrong...';
+  }
+
+  onClickGenerate() {
+    if (!this.fieldIsInvalid('url')) {
+      this.backendApiService.generateShortUrl(this.mainForm.value.url).subscribe(
+        res => {
+          this.shortUrl = res.shortUrl;
+          this.generateResultVisible = true;
+          this.customUrlVisible = false;
+          this.urlFieldVisible = false;
+        }
+      );
+    }
+  }
+
+
+  onClickCustom() {
+    this.urlFieldVisible = false;
+    this.customUrlVisible = true;
+  }
+
+  onClickRestartAfterAnimation($event) {
+    if ($event.toState === 'void') {
+    this.ngOnInit();
+    }
+  }
+
+  hideResultAndRestart() {
+    this.generateResultVisible = false;
+  }
+
+  onClickGenerateCustom() {
+    if (!this.fieldIsInvalid('short')) {
+      this.backendApiService.generateShortUrl(this.mainForm.value.url, this.mainForm.value.short).subscribe(
+        res => {
+          this.shortUrl = res.shortUrl;
+          this.generateResultVisible = true;
+          this.customUrlVisible = false;
+          this.urlFieldVisible = false;
+        }
+      );
+    }
+
+  }
+
 }

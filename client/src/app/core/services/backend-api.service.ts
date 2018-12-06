@@ -34,7 +34,7 @@ export class BackendApiService {
     let queryString = '';
 
     if (urlParams.shortUrl) {
-      queryString = `?shortUrl=${encodeURIComponent(JSON.stringify(urlParams.filter))}`;
+      queryString = `?shortUrl=${encodeURIComponent(urlParams.shortUrl)}`;
     }
     const request = new HttpRequest(method, `${url}${queryString}`, postBody, { headers });
     return this.http.request(request).pipe(
@@ -48,7 +48,7 @@ export class BackendApiService {
     return this.request('POST', `${this.baseApiUrl}/generateShortUrl`, {url, shortUrl});
   }
 
-  existShortUrl(shortUrl: string): Observable<boolean> {
+  isShortUrlExist(shortUrl: string): Observable<boolean> {
     return this.request('GET', `${this.baseApiUrl}/existShortUrl`, undefined, { shortUrl });
 
   }
@@ -57,7 +57,7 @@ export class BackendApiService {
     return this.request('GET', `${this.baseApiUrl}/all`);
   }
 
-  validateUrl(url: string): Observable<any> {
+  isUrlExist(url: string): Observable<any> {
     return this.request('POST', `${this.baseApiUrl}/validateUrl`, {url});
   }
 
