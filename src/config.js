@@ -1,6 +1,6 @@
 let winston = require('./logger/winston');
 
-const env = process.env.NODE_ENV; // 'dev' or 'prod'
+const env = process.env.NODE_ENV || 'dev'; // 'dev' or 'prod'
 winston.info("Use NODE_ENV: " + env);
 winston.info("Use DB_USERNAME: " + process.env.DB_USERNAME);
 const dev = {
