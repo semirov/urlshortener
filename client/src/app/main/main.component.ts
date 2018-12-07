@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ValidatorsService } from '../core/services/validators.service';
 import { BackendApiService } from '../core/services/backend-api.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { enterLeave, enterDelay3sec, leave } from '../shared/animation/enterLeave';
 import { PlatformLocation } from '@angular/common';
 import { ClipboardService } from 'ngx-clipboard';
@@ -43,8 +43,8 @@ export class MainComponent implements OnInit {
 
   private createForm() {
     this.mainForm = this.fb.group({
-      url: ['', Validators.required, this.validatorsService.urlValidator()],
-      short: ['', undefined, this.validatorsService.customLinkExistValidator()],
+      url: ['', [Validators.required, this.noWhitespaceValidator], this.validatorsService.urlValidator()],
+      short: ['', this.noWhitespaceValidator, this.validatorsService.customLinkExistValidator()],
       generatedLink: [{ value: '', disabled: true }],
     });
   }
@@ -57,12 +57,12 @@ export class MainComponent implements OnInit {
 
   getErrorMessage(fieldName: string) {
     const errors = this.mainForm.get(fieldName).errors;
-    // console.log(fieldName, errors);
     if (errors && errors['required']) { return 'Field is required..'; }
     if (errors && errors['urlNotValid']) { return 'Url has the wrong format ..'; }
     if (errors && errors['urlNotExist']) { return 'We checked, this url does not exist, we are sorry..'; }
     if (errors && errors['shortUrlExist']) { return 'Link already in use, try another..'; }
     if (errors && errors['invalidShortUrl']) { return 'Sorry, but this link cannot be used..'; }
+    if (errors && errors['whitespace']) { return 'Whitespaces are not allowed..'; }
     return 'Something is wrong...';
   }
 
@@ -116,5 +116,11 @@ export class MainComponent implements OnInit {
     this.clipboardService.copyFromContent(this.shortUrl);
       tooltip.open({tipMessage: 'Copied!'});
   }
+
+  public noWhitespaceValidator(control: FormControl) {
+    const isWhitespace = /\s/g.test(control.value || '');
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
+}
 
 }

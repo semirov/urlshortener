@@ -62,7 +62,7 @@ export class ValidatorsService {
   }
 
   isProtected(link: string): boolean {
-    if (link.indexOf('api')) {
+    if (!/^(api|https?:\/\/)/i.test(link)) {
       return true;
     }
     return false;
