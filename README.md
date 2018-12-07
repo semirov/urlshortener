@@ -1,5 +1,4 @@
 
-Have a look at the [DEMO SITE](https://sfv-urlshortener.herokuapp.com/)
 
 # urlshortener
 
@@ -16,6 +15,10 @@ Have a look at the [DEMO SITE](https://sfv-urlshortener.herokuapp.com/)
 6. The default short link lifetime is 15 days
 
 7. All events are written to the log
+
+
+Have a look at the [DEMO SITE](https://sfv-urlshortener.herokuapp.com/)
+> Sometimes you have to wait, Heroku often puts the application on standby.
 
 ### Getting Started
 
