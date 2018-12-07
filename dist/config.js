@@ -36,8 +36,4 @@ var config = {
   production: production
 };
 
-function fullPath() {
-  return 'mongodb://' + this.host + ':' + this.port + '/' + this.name;
-}
-
 module.exports = config[env];

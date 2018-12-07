@@ -456,7 +456,7 @@ function generateFullRedirectUrl(shortUrl) {
     if (process.env.NODE_ENV == 'production') {
         return config.app.baseUrl + '/' + shortUrl;
     } else {
-        return config.app.baseUrl + ':' + config.app.port + '/' + shortUrl;
+        return config.app.baseUrl + '/' + shortUrl;
     }
 }
 

@@ -21,7 +21,7 @@
           class="form-control" placeholder="Enter your custom path">
         <div class="input-group-append">
           <!--  is-invalid -->
-          <button (click)='onClickGenerateCustom()' (keyup.enter)='onClickGenerateCustom()' class="btn btn-outline-secondary" type="button">Create</button>
+          <button (click)='onClickGenerateCustom()' [disabled]="fieldIsInvalid('short')" (keyup.enter)='onClickGenerateCustom()' class="btn btn-outline-secondary" type="button">Create</button>
         </div>
         <div  @enterLeave class="invalid-feedback">
           {{getErrorMessage('short')}}
