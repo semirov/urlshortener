@@ -82,7 +82,7 @@ If you need, change config files
 * [Express](https://expressjs.com/ru/) - The web framework for node.js server
 * [Mongoose](https://mongoosejs.com/) - ODM for Mongoose database
 * [Angular 7](https://angular.io/) - The web framework for client
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds 
+* [ng-bootstrap](https://ng-bootstrap.github.io/#/home) - Bootstap 4 for Angular
 
 ## Authors
 
