@@ -30,6 +30,6 @@ export class RouteGuard implements CanActivate {
         }
       );
 
-    })
+    });
   }
 }

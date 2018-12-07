@@ -1,16 +1,13 @@
 <div class="row justify-content-lg-center">
-  <div class="col-lg-7 text-left"  @enterLeave *ngIf="mainComponentVisible">
+  <div class="col-lg-7 text-left" @enterLeave *ngIf="mainComponentVisible">
     <form [formGroup]="mainForm">
       <!-- url field -->
       <div @enterLeave class="input-group" *ngIf="urlFieldVisible">
-        <input formControlName="url" (keyup.enter)="onClickGenerate()" [class.is-invalid]="fieldIsInvalid('url') && !this.mainForm.pristine"
-        type="url"  
-        class="form-control" 
-        placeholder="Enter the URL to create a short link" 
-        aria-label="Enter the URL to create a short link">
+        <input formControlName="url" size="50" (keyup.enter)="onClickGenerate()" [class.is-invalid]="fieldIsInvalid('url') && !this.mainForm.pristine"
+          type="url" class="form-control" placeholder="Enter the URL to create a short link" aria-label="Enter the URL to create a short link">
         <div class="input-group-append">
-          <button (click) = 'onClickGenerate()'   [disabled] = "fieldIsInvalid('url')" class="btn btn-outline-secondary" type="button">Create</button>
-          <button (click) = 'onClickCustom()' [disabled] = "fieldIsInvalid('url')" class="btn btn-outline-secondary" type="button">Custom</button>
+          <button (click)='onClickGenerate()' [disabled]="fieldIsInvalid('url')" class="btn btn-outline-secondary" type="button">Create</button>
+          <button (click)='onClickCustom()' [disabled]="fieldIsInvalid('url')" class="btn btn-outline-secondary" type="button">Custom</button>
         </div>
         <div class="invalid-feedback">
           {{getErrorMessage('url')}}
@@ -18,33 +15,30 @@
       </div>
 
       <!-- custom short field -->
-      <div  @enterLeave class="input-group" *ngIf="customUrlVisible">
-          <div class="input-group-prepend">
-              <span class="input-group-text">{{currentUrl}}</span>
-            </div>
-        <input formControlName="short"  (keyup.enter)="onClickGenerateCustom()" [class.is-invalid]="fieldIsInvalid('short')"
-        type="text" 
-        class="form-control" 
-        placeholder="Enter your custom path" 
-        aria-label="Enter the URL to create a short link">
+      <div @enterLeave class="input-group" *ngIf="customUrlVisible">
+
+        <input formControlName="short" (keyup.enter)="onClickGenerateCustom()" [class.is-invalid]="fieldIsInvalid('short')" type="text"
+          class="form-control" placeholder="Enter your custom path">
         <div class="input-group-append">
           <!--  is-invalid -->
-          <button (click) = 'onClickGenerateCustom()' (keyup.enter)='onClickGenerateCustom()'  class="btn btn-outline-secondary" type="button">Create</button>
+          <button (click)='onClickGenerateCustom()' (keyup.enter)='onClickGenerateCustom()' class="btn btn-outline-secondary" type="button">Create</button>
         </div>
-        <div class="invalid-feedback">
-            {{getErrorMessage('short')}}
+        <div  @enterLeave class="invalid-feedback">
+          {{getErrorMessage('short')}}
         </div>
       </div>
+      <small  @enterLeave *ngIf="customUrlVisible" class="form-text text-muted">For example: {{currentUrl}}<span><u>youCustomLink</u></span></small>
     </form>
     <div @enterLeave @leave (@leave.done)="onClickRestartAfterAnimation($event)" *ngIf="generateResultVisible" class="text-center generate-result">
-      <p class="display-4">Ta-da!</p>
-     <span class="lead">This is you short url: </span> <span class="lead strong copy-clipboard" #tooltip="ngbTooltip" [ngbTooltip]="tipContent"  (click)="onClickLink(tooltip)" placement="bottom" ngbTooltip="Click to copy"> {{shortUrl}}</span>  
+      <p class="lead">This is you short url: </p>
+      <p class="lead strong copy-clipboard" #tooltip="ngbTooltip" [ngbTooltip]="tipContent" (click)="onClickLink(tooltip)" placement="bottom"
+        ngbTooltip="Click to copy"> {{shortUrl}}</p>
     </div>
 
     <ng-template #tipContent let-tipMessage="tipMessage">{{tipMessage || 'Click to copy!'}}</ng-template>
 
-    <div  @enterDelay3sec *ngIf="generateResultVisible" class="text-center restart-button">
-        <button (click) = 'hideResultAndRestart()' class="btn btn-outline-secondary" type="button" >Another link?</button>
+    <div @enterDelay3sec *ngIf="generateResultVisible" class="text-center restart-button">
+      <button (click)='hideResultAndRestart()' class="btn btn-outline-secondary" type="button">Another link?</button>
     </div>
 
   </div>
