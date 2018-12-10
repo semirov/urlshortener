@@ -14,7 +14,7 @@ function defaultSheduler() {
 }
 
 function removeOldUrls() {
-    return schedule.scheduleJob('5 * * * * *', _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    return schedule.scheduleJob('0 * * * *', _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var removeResult;
         return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
