@@ -43,13 +43,21 @@ export class MainComponent implements OnInit {
 
   private createForm() {
     this.mainForm = this.fb.group({
-      url: ['', [Validators.required, this.noWhitespaceValidator], this.validatorsService.urlValidator()],
-      short: ['', this.noWhitespaceValidator, this.validatorsService.customLinkExistValidator()],
-      generatedLink: [{ value: '', disabled: true }],
+      url: ['',
+        [
+          Validators.required,
+          this.validatorsService.noWhitespaceValidator
+        ],
+        this.validatorsService.urlValidator()
+      ],
+      short: ['',
+        this.validatorsService.noWhitespaceValidator,
+        this.validatorsService.customLinkExistValidator()
+      ],
     });
   }
 
-  fieldIsInvalid(fieldName: string) {
+  isFieldInvalid(fieldName: string) {
     const errors = this.mainForm.get(fieldName).errors;
     const isError = errors ? true : false;
     return isError;
@@ -61,13 +69,13 @@ export class MainComponent implements OnInit {
     if (errors && errors['urlNotValid']) { return 'Url has the wrong format ..'; }
     if (errors && errors['urlNotExist']) { return 'We checked, this url does not exist, we are sorry..'; }
     if (errors && errors['shortUrlExist']) { return 'Link already in use, try another..'; }
-    if (errors && errors['invalidShortUrl']) { return 'Sorry, but this link cannot be used..'; }
+    if (errors && errors['invalidShortUrl']) { return 'Please, only words, numbers and underscore..'; }
     if (errors && errors['whitespace']) { return 'Whitespaces are not allowed..'; }
     return 'Something is wrong...';
   }
 
   onClickGenerate() {
-    if (!this.fieldIsInvalid('url')) {
+    if (!this.isFieldInvalid('url')) {
       this.backendApiService.generateShortUrl(this.mainForm.value.url).subscribe(
         res => {
           this.shortUrl = res.shortUrl;
@@ -79,15 +87,14 @@ export class MainComponent implements OnInit {
     }
   }
 
-
-  onClickCustom() {
+  onClickCustomButton() {
     this.urlFieldVisible = false;
     this.customUrlVisible = true;
   }
 
   onClickRestartAfterAnimation($event) {
     if ($event.toState === 'void') {
-    this.ngOnInit();
+      this.ngOnInit();
     }
   }
 
@@ -96,7 +103,7 @@ export class MainComponent implements OnInit {
   }
 
   onClickGenerateCustom() {
-    if (!this.fieldIsInvalid('short')) {
+    if (!this.isFieldInvalid('short')) {
       this.backendApiService.generateShortUrl(this.mainForm.value.url, this.mainForm.value.short).subscribe(
         res => {
           this.shortUrl = res.shortUrl;
@@ -114,13 +121,9 @@ export class MainComponent implements OnInit {
       tooltip.close();
     }
     this.clipboardService.copyFromContent(this.shortUrl);
-      tooltip.open({tipMessage: 'Copied!'});
+    tooltip.open({ tipMessage: 'Copied!' });
   }
 
-  public noWhitespaceValidator(control: FormControl) {
-    const isWhitespace = /\s/g.test(control.value || '');
-    const isValid = !isWhitespace;
-    return isValid ? null : { 'whitespace': true };
-}
+
 
 }
