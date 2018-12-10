@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { enterDelay3sec } from '../shared/animation/enterLeave';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+
+import { enterDelay3sec } from '../shared/animation/enterLeave';
 
 @Component({
   selector: 'app-not-found',

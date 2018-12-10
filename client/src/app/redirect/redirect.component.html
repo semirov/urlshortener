@@ -1,3 +1,11 @@
 <p class="display-4">
   Wait a moment, you will be redirected...
 </p>
+
+
+<div  @enterDelay3sec class="text-center navigate-button">
+  <p>H-m-m-m.. you still have not redirected? Maybe something went wrong.</p>
+  <button (click) = 'navigateToMain()' class="btn btn-outline-secondary" type="button">Generate short link?</button>
+  or
+  <button (click) = 'comeBack()' class="btn btn-outline-secondary" type="button">Come back?</button>
+</div>
