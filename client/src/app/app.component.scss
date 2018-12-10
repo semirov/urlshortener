@@ -15,6 +15,12 @@
     background-repeat: no-repeat;
     background-position: center center;
     .logo {
+      p {
+        cursor: pointer;
+      }
+      p:focus {
+        outline: none;
+      }
       display: block;
       margin: 0 auto;
       position: relative;
