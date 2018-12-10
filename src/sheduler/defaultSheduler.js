@@ -10,7 +10,7 @@ function defaultSheduler() {
 }
 
 function removeOldUrls() {
-    return schedule.scheduleJob('5 * * * * *', async function () {
+    return schedule.scheduleJob('0 * * * *', async function () {
         let removeResult = await urlModel.deleteMany({ expiresDate: { $lt: new Date() } }).exec();
         if (removeResult.n > 0) {
             winston.info(`SHEDULER: removed ${removeResult.n} recordrs`);
