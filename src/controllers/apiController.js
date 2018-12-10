@@ -14,9 +14,7 @@ async function generateShortUrl(req, res, next) {
         let url = req.body.url;
         let customShortUrl = req.body.shortUrl;
         let isUrlValid = await urlIsValid(url);
-        if (!isUrlValid) {
-            return next('INVALID_URL');
-        }
+        if (!isUrlValid) { return next('INVALID_URL'); }
         let shortUrl;
         if (customShortUrl) {
             let isCustomUrlExist = await isShortUrlExist(customShortUrl);

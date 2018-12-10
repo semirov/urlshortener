@@ -20,8 +20,6 @@ let config = require("./config");
 
 let app = express();
 
-
-
 app.use(cors());
 app.use(logger('combined', { stream: winston.stream }));
 app.use(express.json());
@@ -29,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/api', apiRouter);
-// app.use(redirectRouter);
+app.use(redirectRouter);
 app.use(express.static(path.join(appRoot.toString(), 'client/dist/client')));
 app.all('/*', (req, res) => res.status(200).sendFile(path.join(appRoot.toString(), './client/dist/client/index.html')));
 app.use(defaultErrorHandler);
