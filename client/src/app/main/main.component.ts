@@ -19,7 +19,6 @@ export class MainComponent implements OnInit {
   customUrlVisible = false;
   generateResultVisible = false;
   mainComponentVisible = true;
-  isInvalid = true;
   currentUrl = '';
   shortUrl = '';
 
@@ -71,17 +70,17 @@ export class MainComponent implements OnInit {
     if (errors && errors['shortUrlExist']) { return 'Link already in use, try another..'; }
     if (errors && errors['invalidShortUrl']) { return 'Please, only words, numbers and underscore..'; }
     if (errors && errors['whitespace']) { return 'Whitespaces are not allowed..'; }
-    return 'Something is wrong...';
+    return '';
   }
 
   onClickGenerate() {
     if (!this.isFieldInvalid('url')) {
       this.backendApiService.generateShortUrl(this.mainForm.value.url).subscribe(
         res => {
-          this.shortUrl = res.shortUrl;
           this.generateResultVisible = true;
           this.customUrlVisible = false;
           this.urlFieldVisible = false;
+          this.shortUrl = res.shortUrl;
         }
       );
     }

@@ -19,7 +19,7 @@
         <input formControlName="short" (keyup.enter)="onClickGenerateCustom()" [class.is-invalid]="isFieldInvalid('short') && !mainForm.controls.short.pristine"
           type="text" class="form-control" placeholder="Enter your custom path">
         <div class="input-group-append">
-          <button (click)='onClickGenerateCustom()' [disabled]="isFieldInvalid('short')" (keyup.enter)='onClickGenerateCustom()' class="btn btn-outline-secondary"
+          <button id="createButton" (click)='onClickGenerateCustom()' [disabled]="isFieldInvalid('short')" (keyup.enter)='onClickGenerateCustom()' class="btn btn-outline-secondary"
             type="button">Create</button>
         </div>
         <div @enterLeave class="invalid-feedback">
@@ -46,3 +46,4 @@
 
   </div>
 </div>
+
