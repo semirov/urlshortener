@@ -82,9 +82,7 @@ async function testUrlStatus(req, res, next) {
 
 async function getRedirectUrl(req, res, next) {
     let shortUrl = req.params.redirectPath;
-    console.log(shortUrl);
     let document = await urlModel.findOne({shortUrl: shortUrl});
-    console.log(document);
     if(!document) {
         return res.send(null);
     }

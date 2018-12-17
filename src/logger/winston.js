@@ -21,6 +21,11 @@ let options = {
   },
 };
 
+if (process.env.NODE_ENV == 'test') {
+  options.console.level = 'error';
+  options.file.level = 'error';
+}
+
 let logger = winston.createLogger({
   transports: [
     new winston.transports.File(options.file),
@@ -28,6 +33,8 @@ let logger = winston.createLogger({
   ],
   exitOnError: false, 
 });
+
+
 
 logger.stream = {
   write: function(message, encoding) {

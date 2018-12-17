@@ -1,8 +1,7 @@
 let winston = require('./logger/winston');
 
-const env = process.env.NODE_ENV || 'dev'; // 'dev' or 'prod'
+const env = process.env.NODE_ENV || 'dev';
 winston.info("Use NODE_ENV: " + env);
-winston.info("Use DB_USERNAME: " + process.env.DB_USERNAME);
 const dev = {
   app: {
     baseUrl: 'http://localhost:4200',
@@ -13,6 +12,19 @@ const dev = {
   },
   settings: {
     expiresDate: 15
+  }
+};
+
+const test = {
+  app: {
+    baseUrl: process.env.APP_BASE_URL || 'http://localhost:3000',
+    port: 3000
+  },
+  db: {
+    connectionString: 'mongodb://localhost:27017/urlshortener_test'
+  },
+  settings: {
+    expiresDate: 1
   }
 };
 
@@ -29,9 +41,11 @@ const production = {
   }
 };
 
+
 const config = {
   dev,
-  production,
+  test,
+  production
 };
 
 module.exports = config[env];
