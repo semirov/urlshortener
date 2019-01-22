@@ -68,13 +68,21 @@ ng build --prod
 ```
 build server (run in app root)
 ```
-npm run buld
+npm run build
 ```
 
 ### App config
 If you need, change config files 
 * for server: URLShortener\src\config.js
 * for client: URLShortener\client\src\environments
+
+### Build docker container
+* create env.list file in project root folder and set credentials
+ ```
+DB_PASSWORD=********
+DB_USERNAME=********
+APP_BASE_URL=%if not type, use dafault url%
+```
 
 
 ## Built With
