@@ -84,6 +84,28 @@ DB_USERNAME=********
 APP_BASE_URL=%if not type, use dafault url%
 ```
 
+### Build from docker-compose
+#### Build for Dev
+```
+git clone https://github.com/semirov/urlshortener.git
+```
+```
+docker-compose up
+```
+#### Build for Production
+```
+git clone https://github.com/semirov/urlshortener.git
+```
+Create env.list file in root folder and set credentials
+ ```
+DB_PASSWORD=********
+DB_USERNAME=********
+APP_BASE_URL=%if not specify, use default http:\\localhost%
+```
+Up docker-compose (use master branch from remote git repository)
+```
+docker-compose -f docker-compose.prod.yml up --build app
+```
 
 ## Built With
 

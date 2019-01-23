@@ -1,12 +1,14 @@
-version: "2"
+version: "3"
 services:
   app:
     container_name: url-shortener
-    env_file:
-      - env.list
+    working_dir: /urlshortener
+    env_file: env.list
     environment:
       NODE_ENV: production
+
     restart: always
+    command: npm start
     build: https://github.com/semirov/urlshortener.git
-    ports:
+    ports: 
       - "80:80"

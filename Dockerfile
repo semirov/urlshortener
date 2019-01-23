@@ -3,10 +3,13 @@
 FROM node:carbon
 
 # create app directory
-WORKDIR /
+RUN mkdir -p /urlshortener
+WORKDIR /urlshortener
+
 
 # copy all project files
-COPY ./ ./
+COPY . .
+
 
 # install client dependencies
 # RUN cd client && npm install
@@ -22,7 +25,6 @@ RUN npm run build
 
 # expose 80 and 3000 port for production and dev config
 EXPOSE 3000 80
-CMD [ "npm", "start" ]
 
 
 
