@@ -9,10 +9,10 @@ WORKDIR /
 COPY ./ ./
 
 # install client dependencies
-RUN cd client && npm install
+# RUN cd client && npm install
 
 # build client
-RUN cd client && $(npm bin)/ng build --prod
+# RUN cd client && $(npm bin)/ng build --prod
 
 # install dependencies
 RUN npm install
@@ -20,12 +20,8 @@ RUN npm install
 #  build app
 RUN npm run build
 
-# set environment
-ENV NODE_ENV=production
-
-# expose 80 port for production config
-RUN ls
-EXPOSE 80
+# expose 80 and 3000 port for production and dev config
+EXPOSE 3000 80
 CMD [ "npm", "start" ]
 
 
