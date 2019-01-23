@@ -86,8 +86,12 @@ APP_BASE_URL=%if not type, use dafault url%
 
 ### Build from docker-compose
 #### Build for Dev
-TODO: add build for dev with nodemon and ng serve
-
+```
+git clone https://github.com/semirov/urlshortener.git
+```
+```
+docker-compose up
+```
 #### Build for Production
 ```
 git clone https://github.com/semirov/urlshortener.git
