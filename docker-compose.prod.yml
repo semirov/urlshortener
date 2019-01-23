@@ -1,0 +1,12 @@
+version: "2"
+services:
+  app:
+    container_name: url-shortener
+    env_file:
+      - env.list
+    environment:
+      NODE_ENV: production
+    restart: always
+    build: https://github.com/semirov/urlshortener.git
+    ports:
+      - "80:80"

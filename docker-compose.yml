@@ -1,0 +1,19 @@
+version: "0"
+services:
+  app:
+    container_name: url-shortener
+    environment:
+      - NODE_ENV=dev
+    restart: always
+    build: build: https://github.com/semirov/urlshortener.git
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    # volumes:
+    #   - ./data:/data/db
+    ports:
+      - "27017:27017"

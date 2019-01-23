@@ -4,11 +4,11 @@ const env = process.env.NODE_ENV || 'dev';
 winston.info("Use NODE_ENV: " + env);
 const dev = {
   app: {
-    baseUrl: 'http://localhost:4200',
+    baseUrl: 'http://localhost:3000',
     port: process.env.PORT || 3000
   },
   db: {
-    connectionString: 'mongodb://localhost:27017/urlshortener'
+    connectionString: 'mongodb://mongo:27017/urlshortener'
   },
   settings: {
     expiresDate: 15
@@ -47,5 +47,6 @@ const config = {
   test,
   production
 };
+
 
 module.exports = config[env];
