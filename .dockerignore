@@ -6,3 +6,4 @@ package.lock.json
 *Dockerfile*
 *docker-compose*
 node_modules
+env.list
