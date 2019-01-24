@@ -2,27 +2,13 @@ version: "3"
 services:
   app:
     container_name: url-shortener
-    volumes: 
-      - ./:/urlshortener
-      - /urlshortener/node_modules
     working_dir: /urlshortener
+    env_file: env.list
     environment:
-      - NODE_ENV=dev
-    # build: https://github.com/semirov/urlshortener.git
-    build: .
+      NODE_ENV: production
 
-    depends_on:
-      - mongo
-    ports:
-      - "3000:3000"
     restart: always
-    command: npm run dev
-    links:
-      - mongo
-  mongo:
-    container_name: mongo
-    image: mongo
-    # volumes:
-      #  - ./data:/data/db
-    ports:
-      - "27017:27017"
+    command: npm start
+    build: https://github.com/semirov/urlshortener.git
+    ports: 
+      - "80:80"

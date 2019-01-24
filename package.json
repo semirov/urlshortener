@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "babel-node": "babel-node --presets=env",
-    "start:dev": "nodemon --exec npm run babel-node -- src/app.js",
+    "dev": "nodemon --exec npm run babel-node -- src/app.js",
     "start": "node ./dist/app.js",
     "build": "babel src -d dist",
     "test": "nyc mocha src/test/*.js --timeout 5000 --require babel-core/register"
