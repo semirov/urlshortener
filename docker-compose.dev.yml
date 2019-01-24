@@ -1,0 +1,49 @@
+version: "3"
+services:
+  client:
+    container_name: urlshort-client
+    volumes: 
+      - ./client:/urlshortener_client
+      - /urlshortener_client/node_modules
+    working_dir: /urlshortener_client
+    build: client
+    expose: 
+      - 4200
+      - 49153
+    ports:
+      - 4200:4200
+      - 49153:49153
+    depends_on:
+      - backend
+    links:
+      - backend
+    command: npm start
+    restart: always
+    
+  backend:
+    container_name: urlshort-backend
+    volumes: 
+      - ./:/urlshortener
+      - /urlshortener/node_modules
+    working_dir: /urlshortener
+    environment:
+      - NODE_ENV=dev
+    build: .
+    expose: 
+      - 3000
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    command: npm run dev
+    restart: always
+
+  mongo:
+    container_name: urlshort-mongo
+    image: mongo
+    # volumes:
+      #  - ./data:/data/db
+    ports:
+      - "27017:27017"
