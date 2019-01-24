@@ -9,7 +9,6 @@ services:
 
     restart: always
     command: npm start
-    # build: https://github.com/semirov/urlshortener.git
-    build: .
+    build: https://github.com/semirov/urlshortener.git
     ports: 
       - "80:80"
